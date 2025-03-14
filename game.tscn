@@ -1,0 +1,308 @@
+[gd_scene load_steps=13 format=3 uid="uid://dbfjy2s8br7sd"]
+
+[ext_resource type="PackedScene" uid="uid://dnsofkb4jkjv8" path="res://scenes/paddle.tscn" id="1_feb5d"]
+[ext_resource type="PackedScene" uid="uid://dngn1y56idq0h" path="res://scenes/ball.tscn" id="2_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://cx8r3s75s16ft" path="res://scenes/walls.tscn" id="3_7jktm"]
+[ext_resource type="Script" uid="uid://daohuil456bmb" path="res://scripts/generate_briks.gd" id="5_7jktm"]
+[ext_resource type="Texture2D" uid="uid://xp4l3w4v5pe2" path="res://break assets/Misc/bg.png" id="5_ryrav"]
+[ext_resource type="Script" uid="uid://tkan4fwbn05x" path="res://scripts/game_manager.gd" id="6_ryrav"]
+[ext_resource type="AudioStream" uid="uid://dwju83feidfdx" path="res://break assets/audio/music/roa-twilight.mp3" id="8_hve3p"]
+[ext_resource type="Theme" uid="uid://cddrbk1svpaof" path="res://theme/new_theme.tres" id="8_j5wjh"]
+[ext_resource type="AudioStream" uid="uid://drrm6qupljsjm" path="res://break assets/audio/sfx/arcade-game-jump.wav" id="8_vef74"]
+[ext_resource type="AudioStream" uid="uid://dec18jl8fb0sx" path="res://break assets/audio/sfx/ball-tap.wav" id="9_hve3p"]
+[ext_resource type="AudioStream" uid="uid://g60lfnorflcn" path="res://break assets/audio/sfx/heavy-sword-smashes-metal.wav" id="11_mfdv2"]
+[ext_resource type="AudioStream" uid="uid://csuoltm8cmb8g" path="res://break assets/audio/sfx/instant-win.wav" id="12_iotsf"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Paddle" parent="." instance=ExtResource("1_feb5d")]
+position = Vector2(168, 616)
+
+[node name="Ball" parent="." instance=ExtResource("2_fc0e3")]
+position = Vector2(216, 200)
+
+[node name="Walls" parent="." instance=ExtResource("3_7jktm")]
+
+[node name="Briks" type="Node2D" parent="."]
+script = ExtResource("5_7jktm")
+
+[node name="bg" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(184, 326)
+scale = Vector2(2.3125, 3.07163)
+texture = ExtResource("5_ryrav")
+
+[node name="GameManager" type="Node2D" parent="." groups=["game_manager"]]
+process_mode = 3
+script = ExtResource("6_ryrav")
+
+[node name="UI" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="GameOver" type="Control" parent="UI"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/GameOver"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOver/CenterContainer"]
+layout_mode = 2
+
+[node name="restart" type="Label" parent="UI/GameOver/CenterContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme = ExtResource("8_j5wjh")
+text = "Game Over!"
+
+[node name="HSeparator" type="HSeparator" parent="UI/GameOver/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("8_j5wjh")
+
+[node name="Retry" type="Button" parent="UI/GameOver/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_j5wjh")
+text = "Retry"
+
+[node name="GameMenu" type="Control" parent="UI"]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/GameMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameMenu/CenterContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="UI/GameMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_j5wjh")
+text = "Break Out"
+
+[node name="HSeparator" type="HSeparator" parent="UI/GameMenu/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("8_j5wjh")
+
+[node name="Start" type="Button" parent="UI/GameMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_j5wjh")
+text = "Start"
+
+[node name="MusicToggle" type="CheckButton" parent="UI/GameMenu/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_j5wjh")
+text = "Music"
+
+[node name="SFXToggle" type="CheckButton" parent="UI/GameMenu/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_j5wjh")
+text = "Sounds"
+
+[node name="B_Credits" type="Button" parent="UI/GameMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_j5wjh")
+text = "Credits"
+
+[node name="Level" type="Label" parent="UI/GameMenu/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("8_j5wjh")
+text = "Level: "
+horizontal_alignment = 1
+
+[node name="Container" type="Control" parent="UI/GameMenu"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="UI/GameMenu/Container"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -160.0
+offset_right = 150.0
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("8_j5wjh")
+text = "\"Move the mouse to the left or to the right to move the paddle.\""
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="GamePause" type="Control" parent="UI"]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/GamePause"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GamePause/CenterContainer"]
+layout_mode = 2
+
+[node name="Pause" type="Label" parent="UI/GamePause/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_j5wjh")
+text = "Pause"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/GamePause/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_j5wjh")
+
+[node name="TextResume" type="Label" parent="UI/GamePause/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme = ExtResource("8_j5wjh")
+text = "Press P or ESC to resume the game."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Credits" type="Control" parent="UI"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SfondoScuro" type="ColorRect" parent="UI/Credits"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.419608)
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Credits"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Credits/CenterContainer"]
+layout_mode = 2
+
+[node name="CreditAudio" type="Label" parent="UI/Credits/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme = ExtResource("8_j5wjh")
+text = "Audio:
+This video game includes audio files sourced from the Cute Pong project, which is licensed under the MIT License. You can find the project on the GitHub profile of sheikhartin (Artin Mohammadi)"
+autowrap_mode = 3
+
+[node name="HSeparator" type="HSeparator" parent="UI/Credits/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("8_j5wjh")
+
+[node name="CreditGraphics" type="Label" parent="UI/Credits/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme = ExtResource("8_j5wjh")
+text = "Graphic Assets: Created by \"artemouse\" on Itch.io"
+autowrap_mode = 3
+
+[node name="HSeparator2" type="HSeparator" parent="UI/Credits/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("8_j5wjh")
+
+[node name="IG" type="Label" parent="UI/Credits/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme = ExtResource("8_j5wjh")
+text = "If you liked the game, follow me on Instagram:
+@game_dev1"
+autowrap_mode = 3
+
+[node name="Back" type="Button" parent="UI/Credits/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_j5wjh")
+text = "Back"
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="Music" type="AudioStreamPlayer" parent="Sounds"]
+unique_name_in_owner = true
+stream = ExtResource("8_hve3p")
+bus = &"Music"
+
+[node name="SFX" type="AudioStreamPlayer" parent="Sounds"]
+unique_name_in_owner = true
+stream = ExtResource("9_hve3p")
+bus = &"SFX"
+
+[node name="SFXPaddle" type="AudioStreamPlayer" parent="Sounds"]
+unique_name_in_owner = true
+stream = ExtResource("8_vef74")
+bus = &"SFX"
+
+[node name="GOver" type="AudioStreamPlayer" parent="Sounds"]
+unique_name_in_owner = true
+process_mode = 3
+stream = ExtResource("11_mfdv2")
+bus = &"SFX"
+
+[node name="Win" type="AudioStreamPlayer" parent="Sounds"]
+unique_name_in_owner = true
+process_mode = 3
+stream = ExtResource("12_iotsf")
+bus = &"SFX"
+
+[connection signal="pressed" from="UI/GameOver/CenterContainer/VBoxContainer/Retry" to="GameManager" method="_on_retry_pressed_game_over"]
+[connection signal="pressed" from="UI/GameMenu/CenterContainer/VBoxContainer/Start" to="GameManager" method="_on_start_pressed"]
+[connection signal="toggled" from="UI/GameMenu/CenterContainer/VBoxContainer/MusicToggle" to="GameManager" method="_on_music_toggled"]
+[connection signal="toggled" from="UI/GameMenu/CenterContainer/VBoxContainer/SFXToggle" to="GameManager" method="_on_sfx_toggle_toggled"]
+[connection signal="pressed" from="UI/GameMenu/CenterContainer/VBoxContainer/B_Credits" to="GameManager" method="_on_b_credits_pressed"]
+[connection signal="pressed" from="UI/Credits/CenterContainer/VBoxContainer/Back" to="GameManager" method="_on_back_pressed"]

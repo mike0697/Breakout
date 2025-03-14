@@ -1,0 +1,53 @@
+[gd_scene load_steps=11 format=3 uid="uid://bui4tjkyhappk"]
+
+[ext_resource type="Script" uid="uid://c8yl67gong752" path="res://scripts/brick.gd" id="1_tj0p1"]
+[ext_resource type="Texture2D" uid="uid://iluicshhfvee" path="res://break assets/bricks/sp_brick_black.png" id="2_ihofc"]
+[ext_resource type="Texture2D" uid="uid://boesjo7xlgyor" path="res://break assets/bricks/sp_brick_blue.png" id="3_x0mpf"]
+[ext_resource type="Texture2D" uid="uid://djq8d6cnkmyi3" path="res://break assets/bricks/sp_brick_green.png" id="4_l3gek"]
+[ext_resource type="Texture2D" uid="uid://djuay8ra2khsg" path="res://break assets/bricks/sp_brick_orange.png" id="5_yb5y6"]
+[ext_resource type="Texture2D" uid="uid://d2tqr8jrs0bb6" path="res://break assets/bricks/sp_brick_pink.png" id="6_cfb27"]
+[ext_resource type="Texture2D" uid="uid://0lqsa7iawefp" path="res://break assets/bricks/sp_brick_purple.png" id="7_u3bxs"]
+[ext_resource type="Texture2D" uid="uid://cx3qhy6d0xxip" path="res://break assets/bricks/sp_brick_red.png" id="8_fsjki"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7na3b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ihofc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_x0mpf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_l3gek")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_yb5y6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_cfb27")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_u3bxs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_fsjki")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5p85m"]
+size = Vector2(38, 18)
+
+[node name="Brick" type="StaticBody2D" groups=["brick"]]
+collision_layer = 4
+script = ExtResource("1_tj0p1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7na3b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5p85m")
