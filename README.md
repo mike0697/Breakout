@@ -127,6 +127,14 @@ func next_level():
 - **Mouse**: Move the paddle horizontally
 - **ESC**: Pause/Resume game
 
+## Credits
+
+The audio files used in this project were sourced from another project. All credit for the sound effects and music goes to the original creators.
+
+- Audio: Obtained from [original source](https://github.com/sheikhartin/cute-pong)
+
+If you are the original creator of any audio assets used in this project and would like attribution updated or content removed, please contact me.
+
 ## Future Development
 
 - Add more power-ups and special abilities
