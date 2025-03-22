@@ -12,6 +12,11 @@ Brick Breaker is an arcade game where the player controls a paddle to bounce a b
 - Faster ball speed
 - Tighter brick spacing
 
+## Play online
+ You can play the online version of the game directly in your browser by visiting:
+ [Play Brick Breaker Online](https://www.gamepix.com/play/break-out)
+ No installation required, just click the link and start playing!
+
 ## Key Features
 
 - **Progressive Difficulty**: The game automatically adjusts difficulty based on the player's level
